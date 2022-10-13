@@ -8,7 +8,7 @@ const WeatherViewer = (props) => {
     try {
       axios
         .get(
-          `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${props.cityData.Key}?apikey=${process.env.React_App_Acc_Key}&metric=true`
+          `https://dataservice.accuweather.com/forecasts/v1/daily/1day/${props.cityData.Key}?apikey=${process.env.React_App_Acc_Key}&metric=true`
         )
         .then((response) => {
           setData(response.data);

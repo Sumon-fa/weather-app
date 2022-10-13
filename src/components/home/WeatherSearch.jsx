@@ -11,7 +11,7 @@ const WeatherSearch = () => {
     setError(null);
     try {
       const { data } = await axios.get(
-        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${process.env.React_App_Acc_Key}&q=${citySearch}`
+        `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${process.env.React_App_Acc_Key}&q=${citySearch}`
       );
       setCityData(data[0]);
     } catch (err) {

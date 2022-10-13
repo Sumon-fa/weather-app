@@ -22,7 +22,7 @@ const WeatherCard = (props) => {
               </span>
             </h4>
             <h6 className='mt-5'>
-              {moment(new Date(props.data.Headline.EffectiveDate)).format("LL")}
+              {moment(new Date(props.data.DailyForecasts[0].Date)).format("LL")}
             </h6>
             <div className='row m-auto' style={{ textAlign: "center" }}>
               <div className='col'>
@@ -70,7 +70,7 @@ const WeatherCard = (props) => {
                     alt='night'
                   />
 
-                  <p className='card-text' style={{ display: "inline-block" }}>
+                  <p className='card-text'>
                     <small className='text-muted'>
                       {props.data.DailyForecasts[0].Night.IconPhrase}
                     </small>

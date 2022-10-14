@@ -8,17 +8,28 @@ const WeatherSearch = () => {
   const [error, setError] = useState(null);
   async function fetchCityData(e) {
     e.preventDefault();
-    setError(null);
+
     try {
-      const { data } = await axios.get(
-        `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${process.env.React_App_Acc_Key}&q=${citySearch}`
-      );
-      setCityData(data[0]);
+      setError(null);
+      if (citySearch.trim().length > 0) {
+        const { data } = await axios.get(
+          `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${process.env.React_App_Acc_Key}&q=${citySearch}`
+        );
+        if (data.length > 0) {
+          setCityData(data[0]);
+        } else {
+          setError("Oh! city name does not exist.");
+        }
+      } else {
+        setError("input field is empty");
+      }
     } catch (err) {
-      setError("Oh! city name does not exist.");
+      setError("Sorry! Api is not working.");
     }
+
     setCitySearch("");
   }
+
   return (
     <div
       style={{
@@ -40,6 +51,7 @@ const WeatherSearch = () => {
             <div className='col-auto'>
               <input
                 autoFocus
+                autoComplete='off'
                 className='form-control'
                 placeholder='Enter the name of a city'
                 value={citySearch}
@@ -52,7 +64,7 @@ const WeatherSearch = () => {
           </div>
         </form>
         {cityData && !error && <WeatherViewer cityData={cityData} />}
-        {error && (
+        {error && !cityData && (
           <p
             style={{ textAlign: "center", fontSize: "1.4em", marginTop: "20%" }}
           >

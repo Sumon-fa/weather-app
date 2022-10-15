@@ -16,7 +16,6 @@ const WeatherSearch = () => {
           `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${process.env.React_App_Acc_Key}&q=${citySearch}`
         );
         if (data.length > 0) {
-          console.log(data);
           setCityData(data[0]);
         } else {
           setCityData("");

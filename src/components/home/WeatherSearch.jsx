@@ -4,26 +4,30 @@ import WeatherViewer from "./WeatherViewer";
 import axios from "axios";
 const WeatherSearch = () => {
   const [citySearch, setCitySearch] = useState("");
-  const [cityData, setCityData] = useState(null);
+  const [cityData, setCityData] = useState();
   const [error, setError] = useState(null);
   async function fetchCityData(e) {
     e.preventDefault();
 
     try {
-      setError(null);
       if (citySearch.trim().length > 0) {
+        setError(null);
         const { data } = await axios.get(
           `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${process.env.React_App_Acc_Key}&q=${citySearch}`
         );
         if (data.length > 0) {
+          console.log(data);
           setCityData(data[0]);
         } else {
+          setCityData("");
           setError("Oh! city name does not exist.");
         }
       } else {
+        setCityData("");
         setError("input field is empty");
       }
     } catch (err) {
+      setCityData("");
       setError("Sorry! Api is not working.");
     }
 
@@ -59,7 +63,7 @@ const WeatherSearch = () => {
               />
             </div>
             <div className='col-auto'>
-              <Button />
+              <Button name='Show weather info' />
             </div>
           </div>
         </form>

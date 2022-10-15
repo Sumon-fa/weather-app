@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import WeatherCard from "../common/WeatherCard";
+import WeatherCard from "./WeatherCard";
 const WeatherViewer = (props) => {
   const [data, setData] = useState();
 
